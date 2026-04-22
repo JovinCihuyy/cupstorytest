@@ -1,54 +1,49 @@
-<h1>Tugas Kelompok 1</h1>
-<h3>Cup-Story</h3>
-
-### Anggota Kelompok:
-##### Jovin Maximilian Tay, Stefanus Rendi, Aurelius Adrian Pristio, Frederika Etanim
+<h1>Tugas Kelompok 4 <br></h1>
+<h2>Pencari-Resep-Makan</h2>
+<h3>Anggota Kelompok:</h3>
+<h5>Jovin Maximilian Tay, Stefanus Rendi, Aurelius Adrian Pristio, Frederika Etanim</h5>
 
 ---
 
-# ☕ Cup Story — Asisten Virtual Cerita di Balik Minuman
+# ☕ Cup Story — Asisten Virtual Customer Service Cafe
 
-> **Digital Beverage Storyteller** — Chatbot berbasis AI yang membantu Anda menjelajahi, menemukan, dan menikmati cerita di balik setiap minuman favorit Anda.
+> **Digital Cafe Chatbot** — Chatbot berbasis AI yang membantu pelanggan Cupstory Cafe menemukan menu, membuat pesanan, dan mendapatkan informasi cafe secara interaktif.
 
-Aplikasi chatbot interaktif yang menggabungkan **AI Language Model (Ollama)** dengan **MCP (Model Context Protocol)** untuk memberikan rekomendasi, informasi, dan cerita seputar minuman secara akurat dan personal.
+Aplikasi chatbot interaktif yang menggabungkan **AI Language Model (Ollama / llama3)** dengan **MCP (Model Context Protocol)** untuk memberikan layanan customer service cafe yang cepat, akurat, dan personal.
 
 ---
 
 ## ✨ Fitur Utama
 
-- 🔍 **Cari Minuman** — Temukan informasi minuman berdasarkan nama atau kategori
-- 🧋 **Lihat Bahan-Bahan** — Daftar lengkap bahan untuk setiap minuman
-- 🎯 **Cari Berdasarkan Bahan** — Temukan minuman dari bahan yang Anda miliki
-- 📅 **Rekomendasi Menu** — Saran minuman untuk pagi, siang, atau malam hari
-- 📚 **Jelajahi Kategori** — Lihat semua kategori minuman yang tersedia
-- 💬 **Chat Interface** — Tanya jawab dengan AI secara natural dalam Bahasa Indonesia
-- 🎨 **UI Modern** — Desain dark theme yang elegant dan responsif
+- 🍵 **Lihat Menu** — Tampilkan daftar menu Kopi & Non-Kopi lengkap dengan harga, rating, dan deskripsi
+- ⭐ **Rekomendasi Minuman** — Saran minuman terbaik berdasarkan kategori dan rating tertinggi
+- 🕐 **Jam Operasional** — Informasi jam buka & tutup cafe per hari
+- 📦 **Buat Pesanan** — Pesan minuman langsung dari chat
+- 🗂️ **Cek Status Pesanan** — Lacak pesanan berdasarkan nama atau status
+- 📍 **Info Cafe** — Alamat, kontak, fasilitas, dan metode pembayaran
+- 💬 **AI Chat (Ollama)** — Tanya jawab natural dengan AI barista dalam Bahasa Indonesia
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Backend
-| Teknologi | Versi | Fungsi |
-|-----------|-------|--------|
-| **Node.js** | ≥18 | Runtime JavaScript |
-| **TypeScript** | ^5.x | Type-safe development |
-| **Express.js** | ^5.x | HTTP server & REST API |
-| **Ollama** | ^0.6.x | Client untuk LLM cloud |
-| **MCP SDK** | ^1.x | Model Context Protocol |
-| **Zod** | ^4.x | Schema validation |
-| **CORS** | ^2.x | Cross-origin resource sharing |
+| Teknologi | Fungsi |
+|-----------|--------|
+| **Node.js** ≥18 | Runtime JavaScript |
+| **TypeScript** | Type-safe development |
+| **Express.js** ^5.x | HTTP server & REST API |
+| **Ollama (llama3)** | Local AI Language Model |
+| **MCP SDK** `@modelcontextprotocol/sdk` | Model Context Protocol server |
+| **Zod** | Schema & parameter validation |
+| **CORS** | Cross-origin resource sharing |
 
 ### Frontend
 | Teknologi | Fungsi |
 |-----------|--------|
 | **HTML5** | Struktur halaman |
 | **Tailwind CSS** | Utility-first CSS framework |
-| **Marked.js** | Markdown parser untuk respons AI |
-| **DOMPurify** | XSS protection |
 | **JavaScript (Vanilla)** | Logika interaktif |
-| **Material Symbols** | Icon set |
-| **Google Fonts** | Typography |
 
 ---
 
@@ -56,19 +51,21 @@ Aplikasi chatbot interaktif yang menggabungkan **AI Language Model (Ollama)** de
 
 ```
 cupstorytest/
-├── README.md                   # Dokumentasi utama (file ini)
-├── backend/                    # Backend Express + MCP
-│   ├── app.ts                  # HTTP server + Ollama integration
-│   ├── cupstory-data.ts        # Database & data minuman
-│   ├── get-information.ts      # Helper untuk mengambil informasi minuman
-│   └── mcp-server.ts           # MCP Server dengan tools
-├── public/                     # Frontend SPA
-│   └── index.html              # Single-page app (HTML + CSS + JS)
-├── node_modules/               # Dependencies (auto-generated)
-├── .gitignore                  # Git ignore rules
-├── package.json                # Dependencies & scripts
-├── package-lock.json           # Lockfile
-└── tsconfig.json               # TypeScript config
+├── README.md                    # Dokumentasi utama (file ini)
+├── backend/                     # Backend Express + MCP
+│   ├── app.ts                   # HTTP server, REST API & Ollama AI chat
+│   ├── cupstory-data.ts         # Database menu, pesanan & helper functions
+│   ├── get-information.ts       # MCP Tool: get_information (baca info.json)
+│   └── mcp-server.ts            # MCP Server dengan 6 tools
+├── public/                      # Frontend SPA
+│   └── index.html               # Single-page app (HTML + CSS + JS)
+├── data/
+│   └── information.json         # Data lokasi, jam, fasilitas, pembayaran
+├── node_modules/                # Dependencies (auto-generated)
+├── .gitignore
+├── package.json                 # Dependencies & scripts
+├── package-lock.json
+└── tsconfig.json                # TypeScript config
 ```
 
 ---
@@ -78,39 +75,48 @@ cupstorytest/
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    Frontend (Browser)                    │
-│            HTML + Tailwind CSS + Vanilla JS              │
 │                   public/index.html                      │
-└────────────────────────────┬────────────────────────────┘
-                             │ HTTP POST /api/chat
-                             ▼
+│              HTML + Tailwind CSS + Vanilla JS            │
+└──────────────────┬──────────────────┬───────────────────┘
+                   │ POST /api/ai-chat │ GET|POST /api/*
+                   ▼                  ▼
 ┌──────────────────────────────────────────────────────────┐
-│              Backend (Express.js Server)                 │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │  app.ts — HTTP API & Ollama Integration             │ │
-│  └─────────────────────────────────────────────────────┘ │
-│                       │                                  │
-│        ┌──────────────┼──────────────┐                  │
-│        │              │              │                  │
-│        ▼              ▼              ▼                  │
-│    MCP Client    Ollama Cloud   MCP Server             │
-│                  (LLM)         (mcp-server.ts)         │
-│                                     │                   │
-│                    ┌────────────────┤                   │
-│                    │                │                   │
-│                    ▼                ▼                   │
-│            cupstory-data.ts  get-information.ts        │
-│            (Database)        (Info Helper)             │
+│              Backend — app.ts (Express :3000)            │
+│                                                          │
+│   REST Endpoints:         AI Chat:                       │
+│   GET  /api/menu          POST /api/ai-chat              │
+│   GET  /api/rekomendasi        │                         │
+│   GET  /api/jam-operasional    ▼                         │
+│   GET  /api/pesanan    Ollama llama3                     │
+│   POST /api/pesan      (localhost:11434)                 │
+└──────────┬───────────────────────────────────────────────┘
+           │
+           ▼
+┌──────────────────────────────────────────────────────────┐
+│              MCP Server — mcp-server.ts                  │
+│                                                          │
+│  Tools:                                                  │
+│  ├── get_menu              → cupstory-data.ts            │
+│  ├── get_info              → cupstory-data.ts            │
+│  ├── get_recom             → cupstory-data.ts            │
+│  ├── get_jam_operasional   → cupstory-data.ts            │
+│  ├── get_pesanan           → cupstory-data.ts            │
+│  ├── post_pesan            → cupstory-data.ts            │
+│  └── get_information       → data/information.json       │
 └──────────────────────────────────────────────────────────┘
 ```
 
-**Flow:**
-1. User mengirim pesan ke frontend (`public/index.html`)
-2. Frontend melakukan POST request ke `/api/chat`
-3. `app.ts` menerima pesan dan mengirimnya ke Ollama LLM
-4. Ollama mengakses MCP tools dari `mcp-server.ts`
-5. Tools mengambil data dari `cupstory-data.ts` via `get-information.ts`
-6. Ollama memberikan respons yang relevan tentang minuman
-7. Frontend menampilkan respons dan render Markdown
+**Flow AI Chat:**
+1. User mengirim pesan ke frontend
+2. Frontend POST ke `/api/ai-chat`
+3. `app.ts` membangun system prompt dengan data cafe + pesan user
+4. Request dikirim ke Ollama `llama3` di `localhost:11434`
+5. Ollama merespons dalam konteks Cupstory Cafe
+6. Frontend menampilkan balasan dari AI barista
+
+**Flow REST API:**
+1. Frontend memanggil endpoint REST (menu, pesanan, dll)
+2. `app.ts` memproses request dan mengembalikan data dari `cupstory-data.ts`
 
 ---
 
@@ -119,7 +125,7 @@ cupstorytest/
 ### Prasyarat
 - **Node.js** ≥ 18.x — [Download](https://nodejs.org/)
 - **Git** — [Download](https://git-scm.com/)
-- **Ollama API Key** — Daftar di [ollama.com](https://ollama.com)
+- **Ollama** — [Download](https://ollama.com) (untuk fitur AI Chat)
 
 ### Instalasi & Setup
 
@@ -132,157 +138,219 @@ cd cupstorytest
 
 # 3. Install dependencies
 npm install
-
-# 4. Update API key di backend/app.ts
-# const OLLAMA_API_KEY = "YOUR_ACTUAL_API_KEY_HERE";
-
-# 5. Jalankan server
-npm start
-# Server berjalan di http://localhost:3000
 ```
 
-### Menjalankan Frontend
+### Setup Ollama (AI Chat)
 
 ```bash
-# Frontend sudah serve otomatis oleh Express.js
-# Buka browser ke http://localhost:3000
+# Install dan jalankan Ollama
+ollama serve
+
+# Pull model llama3 (dilakukan sekali)
+ollama pull llama3
+```
+
+### Jalankan Server
+
+```bash
+npm start
+# 🚀 Server berjalan di http://localhost:3000
+# 📡 Ollama harus running di http://localhost:11434
+```
+
+### Buka Aplikasi
+
+```
+Buka browser → http://localhost:3000
 ```
 
 ---
 
 ## 📡 API Endpoints
 
-### POST `/api/chat`
-Mengirim pesan chat dan menerima respons dari AI.
+### 💬 POST `/api/ai-chat`
+Chat dengan AI barista Cupstory.
 
 **Request:**
 ```json
 {
-  "message": "Ceritakan tentang kopi espresso",
-  "sessionId": "user123"
+  "message": "Rekomendasiin minuman yang enak dong"
 }
 ```
-
 **Response:**
 ```json
 {
-  "reply": "Espresso adalah minuman kopi yang diseduh dengan...",
-  "sessionId": "user123"
-}
-```
-
-### POST `/api/reset`
-Reset sesi chat untuk user tertentu.
-
-**Request:**
-```json
-{
-  "sessionId": "user123"
-}
-```
-
-### GET `/api/health`
-Health check server status.
-
-**Response:**
-```json
-{
-  "status": "ok",
-  "mcpConnected": true
+  "message": "Cobain Signature Latte kita kak, bestseller banget ⭐ ..."
 }
 ```
 
 ---
 
-## 🔧 MCP Tools
-
-### `get-information`
-Mengambil informasi lengkap tentang minuman dari database.
+### 🍵 GET `/api/menu`
+Ambil daftar menu, bisa filter berdasarkan kategori.
 
 ```
-Source: backend/get-information.ts
-Data  : backend/cupstory-data.ts
+GET /api/menu
+GET /api/menu?kategori=Kopi
+GET /api/menu?kategori=Non-Kopi
+```
+**Response:**
+```json
+[
+  { "nama": "Signature Latte", "kategori": "Kopi", "harga": 28000 },
+  { "nama": "Caramel Macchiato", "kategori": "Kopi", "harga": 32000 }
+]
 ```
 
-Dokumentasi lengkap tools → lihat **[backend/mcp-server.ts](backend/mcp-server.ts)**
+---
+
+### ⭐ GET `/api/rekomendasi`
+Ambil rekomendasi minuman terbaik.
+
+```
+GET /api/rekomendasi
+GET /api/rekomendasi?kategori=Non-Kopi
+```
+
+---
+
+### 🕐 GET `/api/jam-operasional`
+Cek jam buka cafe.
+
+```
+GET /api/jam-operasional
+GET /api/jam-operasional?hari=Sabtu
+```
+**Response:**
+```json
+[{ "hari": "Sabtu", "buka": "07:30", "tutup": "23:00" }]
+```
+
+---
+
+### 📦 POST `/api/pesan`
+Buat pesanan baru.
+
+**Request:**
+```json
+{
+  "menu": "Signature Latte",
+  "jumlah": 2
+}
+```
+**Response:**
+```json
+{
+  "message": "Pesanan 2 Signature Latte berhasil dibuat ☕"
+}
+```
+
+---
+
+### 🗂️ GET `/api/pesanan`
+Cek daftar pesanan, bisa filter status atau nama.
+
+```
+GET /api/pesanan
+GET /api/pesanan?status=Dalam Proses
+GET /api/pesanan?nama=Rizky
+```
+
+---
+
+## 🔧 MCP Tools (6 Tools)
+
+MCP Server berjalan di `backend/mcp-server.ts` dan digunakan untuk integrasi AI tool calling.
+
+| Tool | Parameter | Fungsi |
+|------|-----------|--------|
+| `get_menu` | `kategori?` (string) | Ambil daftar menu |
+| `get_info` | — | Info cafe (alamat, kontak, fasilitas) |
+| `get_recom` | `kategori?` (string) | Rekomendasi minuman terbaik |
+| `get_jam_operasional` | `hari?` (string) | Jam buka & tutup per hari |
+| `get_pesanan` | `status?`, `nama?` | Cek status pesanan |
+| `post_pesan` | `menu`, `jumlah`, `nama?` | Buat pesanan baru |
+| `get_information` | `kategori?` (semua/lokasi/jam/fasilitas/pembayaran) | Info lengkap dari JSON |
+
+---
+
+## 📊 Data Menu
+
+| Nama | Kategori | Harga | Rating |
+|------|----------|-------|--------|
+| Signature Latte | Kopi | Rp 28.000 | ⭐ 4.9 |
+| Caramel Macchiato | Kopi | Rp 32.000 | ⭐ 4.8 |
+| Americano | Kopi | Rp 22.000 | ⭐ 4.7 |
+| Matcha Latte | Non-Kopi | Rp 30.000 | ⭐ 4.8 |
+| Chocolate Frappe | Non-Kopi | Rp 34.000 | ⭐ 4.9 |
+| Lemon Tea | Non-Kopi | Rp 18.000 | ⭐ 4.6 |
+
+---
+
+## 📍 Info Cafe
+
+| | |
+|-|--|
+| **Alamat** | Jl. Contoh No. 123, Pontianak |
+| **WhatsApp** | +62 812-3456-7890 |
+| **Instagram** | @cupstorycafe |
+| **Fasilitas** | WiFi, Outdoor Area, AC Room, Power Outlet, Parking |
+| **Jam Buka** | Senin–Kamis 08:00–22:00 \| Jumat 08:00–23:00 \| Sabtu 07:30–23:00 \| Minggu 07:30–22:00 |
 
 ---
 
 ## 🧪 Testing & Development
 
-### Development Mode
+### Development Mode (auto-reload)
 ```bash
 npm run dev
-# Menggunakan tsx watch untuk auto-reload
 ```
 
 ### Jalankan MCP Server Standalone
 ```bash
 npm run mcp
-# Untuk testing tools secara terpisah
 ```
 
 ### Manual Testing dengan cURL
 
 ```bash
-# Test chat endpoint
-curl -X POST http://localhost:3000/api/chat \
+# AI Chat
+curl -X POST http://localhost:3000/api/ai-chat \
   -H "Content-Type: application/json" \
-  -d '{"message":"Ceritakan tentang kopi espresso","sessionId":"test1"}'
+  -d '{"message":"Menu apa yang paling enak?"}'
 
-# Test health check
-curl http://localhost:3000/api/health
+# Ambil semua menu
+curl http://localhost:3000/api/menu
 
-# Test reset session
-curl -X POST http://localhost:3000/api/reset \
+# Menu kopi saja
+curl "http://localhost:3000/api/menu?kategori=Kopi"
+
+# Buat pesanan
+curl -X POST http://localhost:3000/api/pesan \
   -H "Content-Type: application/json" \
-  -d '{"sessionId":"test1"}'
+  -d '{"menu":"Signature Latte","jumlah":1}'
+
+# Cek jam operasional hari Sabtu
+curl "http://localhost:3000/api/jam-operasional?hari=Sabtu"
 ```
-
-### Testing di Browser
-1. Buka [http://localhost:3000](http://localhost:3000)
-2. Coba pertanyaan seperti:
-   - "Apa itu kopi espresso?"
-   - "Bahan-bahan untuk membuat thai tea?"
-   - "Rekomendasikan minuman untuk pagi hari"
-   - "Ceritakan sejarah kopi"
-   - "Saya punya susu dan gula, bisa bikin minuman apa?"
-
----
-
-## 📊 Data Minuman
-
-Database minuman tersimpan di `backend/cupstory-data.ts` dengan berbagai informasi:
-- Deskripsi lengkap & cerita asal-usul
-- Waktu penyajian ideal
-- Daftar bahan lengkap
-- Langkah-langkah pembuatan
-- Tags untuk pencarian
 
 ---
 
 ## 🔐 Keamanan
 
-- ✅ XSS Protection — Menggunakan DOMPurify untuk sanitasi HTML
-- ✅ CORS Protection — Express CORS middleware
-- ✅ Input Validation — Zod schema validation untuk parameters
-- ✅ API Key Management — Gunakan environment variables untuk sensitive data
-
-**Catatan:** Jangan commit API key ke repository. Gunakan `.env` file atau environment variables.
+- ✅ **CORS Protection** — Express CORS middleware
+- ✅ **Input Validation** — Zod schema validation pada semua MCP tools
+- ✅ **Type Safety** — Full TypeScript dengan strict types
+- ✅ **XSS-safe** — Tidak ada dangerouslySetInnerHTML; output disanitasi di frontend
 
 ---
 
 ## 🎯 Scripts Tersedia
 
 ```bash
-# Production
-npm start          # Jalankan server dengan tsx
-
-# Development
-npm run dev        # Jalankan dengan watch mode
-
-# Testing
-npm run mcp        # Jalankan MCP server standalone
+npm start       # Jalankan server (production)
+npm run dev     # Jalankan dengan watch mode (development)
+npm run mcp     # Jalankan MCP server standalone
 ```
 
 ---
@@ -291,9 +359,9 @@ npm run mcp        # Jalankan MCP server standalone
 
 Proyek ini adalah tugas kelompok untuk mempelajari:
 - MCP (Model Context Protocol) architecture
-- AI integration dengan Large Language Models
-- Full-stack development dengan TypeScript
-- RESTful API design
+- AI integration dengan Local Language Models (Ollama)
+- Full-stack development dengan TypeScript & Express.js
+- RESTful API design & tool-calling pattern
 
 ---
 
@@ -305,9 +373,9 @@ MIT License © 2025
 
 ## 📞 Support & Questions
 
-Untuk pertanyaan atau issues, silakan buka:
+Untuk pertanyaan atau issues:
 - [GitHub Issues](https://github.com/JovinCihuyy/cupstorytest/issues)
 
 ---
 
-**Selamat menggunakan Cup Story! ☕ Semoga membantu Anda menemukan cerita di balik minuman favorit Anda!**
+**Selamat menggunakan Cup Story! ☕ Nikmati pengalaman memesan minuman favoritmu dengan mudah!**
