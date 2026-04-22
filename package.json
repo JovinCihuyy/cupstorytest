@@ -1,9 +1,23 @@
 {
-  "devDependencies": {
-    "@types/node": "^25.6.0",
-    "typescript": "^6.0.2"
+  "type": "module",
+  "scripts": {
+    "dev:app": "tsx backend/app.ts",
+    "dev:mcp": "tsx backend/mcp-server.ts",
+    "dev": "npm run dev:app",
+    "build": "tsc"
   },
   "dependencies": {
-    "zod": "^4.3.6"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.3"
   }
 }
