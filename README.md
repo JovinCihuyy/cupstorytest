@@ -1,7 +1,7 @@
 <h1>Tugas Kelompok 1 <br></h1>
 <h2>Cup-Story</h2>
 <h3>Anggota Kelompok:</h3>
-<h5>Jovin Maximilian Tay, Stefanus Rendi, Aurelius Adrian Pristio, Frederika Etanim</h5>
+<h5>Jovin Maximilian Tay, Stefanus Rendy, Aurelius Adrian Pristio, Frederika Etanim</h5>
 
 ---
 
